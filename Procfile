@@ -1,1 +1,1 @@
-web: python main.py
+web: gunicorn -w 1 "flask_server:app"
