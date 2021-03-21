@@ -17,7 +17,7 @@ class ShippingService(Service):
     def shipping(ctx, distance, weight):
         distance = distance or ctx.udc.config['DISTANCE']
         weight = weight or ctx.udc.config['WEIGHT']
-        yield u'%i' % (float(distance) * float(weight) // 2 )
+        yield u'%i' % (float(distance)//10 + float(weight)//2 )
 
 
 class UserDefinedContext(object):
