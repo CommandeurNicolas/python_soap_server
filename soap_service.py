@@ -3,13 +3,21 @@ from spyne.protocol.http import HttpRpc
 from spyne.protocol.json import JsonDocument
 
 
-class HelloWorldService(Service):
+# class HelloWorldService(Service):
+#     @rpc(Unicode, Integer, _returns=Iterable(Unicode))
+#     def hello(ctx, name, times):
+#         name = name or ctx.udc.config['HELLO']
+#         times = times or ctx.udc.config['TIMES']
+#         for i in range(times):
+#             yield u'Hello, %s' % name
+
+class ShippingService(Service):
     @rpc(Unicode, Integer, _returns=Iterable(Unicode))
-    def hello(ctx, name, times):
-        name = name or ctx.udc.config['HELLO']
-        times = times or ctx.udc.config['TIMES']
-        for i in range(times):
-            yield u'Hello, %s' % name
+    def shipping(ctx, distance, weight):
+        distance = distance or ctx.udc.config['DISTANCE']
+        weight = weight or ctx.udc.config['WEIGHT']
+        yield float(distance) * 0.5 * float(weight)
+
 
 
 class UserDefinedContext(object):
@@ -18,11 +26,8 @@ class UserDefinedContext(object):
 
 
 def create_app(flask_app):
-    """Creates SOAP services application and distribute Flask config into
-    user con defined context for each method call.
-    """
     application = Application(
-        [HelloWorldService], 'spyne.examples.hello',
+        [ShippingService], tns='shipping',
         # The input protocol is set as HttpRpc to make our service easy to call.
         in_protocol=HttpRpc(validator='soft'),
         out_protocol=JsonDocument(ignore_wrappers=True),

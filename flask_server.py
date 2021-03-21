@@ -7,10 +7,18 @@ app = Flask(__name__)
 app.config.from_object('config.Config')
 app.wsgi_app = WsgiApplication(soap_service.create_app(app))
 
-@app.route('/hello')
-def hello():
+# @app.route('/hello')
+# def hello():
+#     response = make_response(json.dumps({
+#         'hello': current_app.config['HELLO'],
+#     }))
+#     response.headers['Content-Type'] = 'application/json'
+#     return response
+
+@app.route('/shipping')
+def shipping():
     response = make_response(json.dumps({
-        'hello': current_app.config['HELLO'],
+        'shipping': current_app.config['HELLO'],
     }))
     response.headers['Content-Type'] = 'application/json'
     return response
