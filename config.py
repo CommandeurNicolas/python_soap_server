@@ -5,7 +5,6 @@ class Config(object):
     SHIPPING = "shipping"
     DISTANCE = 1
     WEIGHT = 1
-    TIMES = 1
 
 class LocalConfig(object):
     ENV='Development'
@@ -14,4 +13,3 @@ class LocalConfig(object):
     SHIPPING = "shipping"
     DISTANCE = 1
     WEIGHT = 1
-    TIMES = 1
