@@ -1,5 +1,6 @@
 from spyne import Iterable, Integer, Unicode, rpc, Application, Service
-from spyne.protocol.http import HttpRpc
+# from spyne.protocol.http import HttpRpc
+from spyne.protocol.soap import Soap11
 from spyne.protocol.json import JsonDocument
 
 
@@ -16,8 +17,7 @@ class ShippingService(Service):
     def shipping(ctx, distance, weight):
         distance = distance or ctx.udc.config['DISTANCE']
         weight = weight or ctx.udc.config['WEIGHT']
-        yield float(distance) * 0.5 * float(weight)
-
+        yield u'%i' % (float(distance) * float(weight) // 2 )
 
 
 class UserDefinedContext(object):
@@ -26,11 +26,18 @@ class UserDefinedContext(object):
 
 
 def create_app(flask_app):
+    # application = Application(
+    #     [ShippingService], tns='shipping',
+    #     # The input protocol is set as HttpRpc to make our service easy to call.
+    #     in_protocol=HttpRpc(validator='soft'),
+    #     out_protocol=JsonDocument(ignore_wrappers=True),
+    # )
+
     application = Application(
-        [ShippingService], tns='shipping',
-        # The input protocol is set as HttpRpc to make our service easy to call.
-        in_protocol=HttpRpc(validator='soft'),
-        out_protocol=JsonDocument(ignore_wrappers=True),
+        [ShippingService], 
+        tns='shipping',
+        in_protocol=Soap11(validator='lxml'),
+        out_protocol=Soap11(),
     )
 
     # Use `method_call` hook to pass flask config to each service method

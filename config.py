@@ -3,8 +3,8 @@ class Config(object):
     TESTING = False
     DEBUG = False
     SHIPPING = "shipping"
-    DISTANCE = 0
-    WEIGHT = 0
+    DISTANCE = 1
+    WEIGHT = 1
     TIMES = 1
 
 class LocalConfig(object):
@@ -12,6 +12,6 @@ class LocalConfig(object):
     TESTING = True
     DEBUG = True
     SHIPPING = "shipping"
-    DISTANCE = 0
-    WEIGHT = 0
+    DISTANCE = 1
+    WEIGHT = 1
     TIMES = 1
