@@ -2,7 +2,7 @@ import json
 from flask import Flask, make_response, current_app
 
 app = Flask(__name__)
-app.config.from_object('config.LocalConfig')
+app.config.from_object('config.Config')
 
 @app.route('/hello')
 def hello():
