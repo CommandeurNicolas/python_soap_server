@@ -18,7 +18,7 @@ app.wsgi_app = WsgiApplication(soap_service.create_app(app))
 @app.route('/shipping')
 def shipping():
     response = make_response(json.dumps({
-        'shipping': current_app.config['HELLO'],
+        'shipping': current_app.config['SHIPPING'],
     }))
     response.headers['Content-Type'] = 'application/json'
     return response
