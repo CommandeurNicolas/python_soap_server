@@ -1,3 +1,4 @@
 spyne==2.13.16
 Flask==1.1.2
 werkzeug==1.0.1
+pyOpenSSL==20.0.1
