@@ -5,6 +5,7 @@ class Config(object):
     API_HANDLER = '/soap/'
     WSDL_PATH = './wsdl/'
     HELLO = "world"
+    TIMES = 1
 
 class LocalConfig(object):
     ENV='Development'
